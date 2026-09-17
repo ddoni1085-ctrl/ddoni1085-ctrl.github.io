@@ -1,1 +1,412 @@
 
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DC Software - Katalog Aplikasi & Produk Modern</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for Interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        /* Biar modal gak ngedip pas awal load */
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen selection:bg-indigo-500 selection:text-white" x-data="appData()">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-900/90 border-b border-slate-800 transition-all duration-300" x-data="{ mobileMenuOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group cursor-pointer">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition duration-300">
+                    <i class="fa-solid fa-code text-white text-lg"></i>
+                </div>
+                <span class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">DC Software</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#beranda" class="text-sm font-medium text-slate-300 hover:text-white transition duration-300">Beranda</a>
+                <a href="#tentang-kami" class="text-sm font-medium text-slate-300 hover:text-white transition duration-300">Tentang Kami</a>
+                <a href="#katalog" class="text-sm font-medium text-slate-300 hover:text-white transition duration-300">Katalog</a>
+                <a href="#kontak" class="text-sm font-medium text-slate-300 hover:text-white transition duration-300">Kontak</a>
+                <a href="#katalog" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-xl shadow-lg shadow-indigo-600/30 transition duration-300">
+                    Coba Demo
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 text-slate-400 hover:text-white">
+                <i class="fa-solid" :class="mobileMenuOpen ? 'fa-xmark' : 'fa-bars'"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             class="md:hidden absolute top-20 left-0 w-full bg-slate-900 border-b border-slate-800 shadow-xl" x-cloak>
+            <div class="px-4 py-6 flex flex-col space-y-4 text-center">
+                <a @click="mobileMenuOpen = false" href="#beranda" class="text-slate-300 hover:text-indigo-400 font-medium">Beranda</a>
+                <a @click="mobileMenuOpen = false" href="#tentang-kami" class="text-slate-300 hover:text-indigo-400 font-medium">Tentang Kami</a>
+                <a @click="mobileMenuOpen = false" href="#katalog" class="text-slate-300 hover:text-indigo-400 font-medium">Katalog Demo</a>
+                <a @click="mobileMenuOpen = false" href="#kontak" class="text-slate-300 hover:text-indigo-400 font-medium">Kontak</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative overflow-hidden py-16 lg:py-24 z-10 pt-28">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-950/50 via-slate-900 to-slate-900 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-4 animate-bounce">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Solusi Digital Masa Depan</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                Bangun Bisnis Digital Anda Bersama Kami
+            </h1>
+            <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg mb-10">
+                Kami menyediakan layanan pembuatan dan pengembangan aplikasi web profesional berkinerja tinggi untuk mendukung pertumbuhan bisnis Anda.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#katalog" class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl shadow-lg shadow-indigo-600/30 transition duration-300">
+                    Lihat Demo Aplikasi
+                </a>
+                <a href="#kontak" class="px-8 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl border border-slate-700 transition duration-300">
+                    Hubungi Kami
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TENTANG KAMI ================= -->
+    <section id="tentang-kami" class="py-20 bg-slate-900/50 border-y border-slate-800/50 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Kiri: Info Tentang Kami -->
+                <div class="order-2 lg:order-1">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-400 mb-4 border border-slate-700">
+                        <i class="fa-solid fa-building"></i>
+                        <span>Tentang DC Software</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight">Inovasi Digital Berawal Dari Sini.</h2>
+                    <p class="text-slate-400 text-base leading-relaxed mb-6">
+                        Berbasis di Subang, Jawa Barat, <strong>DC Software</strong> merupakan penyedia layanan pengembangan perangkat lunak (Software House) yang berfokus pada pembuatan website, aplikasi manajemen bisnis, dan sistem digital kustom.
+                    </p>
+                    <p class="text-slate-400 text-base leading-relaxed mb-8">
+                        Kami berkomitmen untuk menterjemahkan ide bisnis Anda menjadi solusi teknologi nyata, efisien, dan modern dengan dukungan arsitektur sistem yang handal.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-indigo-400 font-bold text-xl mb-2">10+</h4>
+                            <p class="text-sm text-slate-500">Proyek Terselesaikan</p>
+                        </div>
+                        <div>
+                            <h4 class="text-indigo-400 font-bold text-xl mb-2">100%</h4>
+                            <p class="text-sm text-slate-500">Klien Puas</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kanan: Gambar/Ilustrasi -->
+                <div class="order-1 lg:order-2">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-700/50 aspect-video lg:aspect-square max-h-[400px] w-full">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Tim DC Software coding" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-indigo-900/20 mix-blend-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= KATALOG (DEMO APLIKASI) ================= -->
+    <section id="katalog" class="pt-24 pb-10 z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Katalog Demo Aplikasi</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">Coba langsung berbagai produk aplikasi buatan kami. Mulai dari sistem manajemen SDM hingga aplikasi bisnis lainnya.</p>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Search Bar -->
+            <div class="max-w-xl mx-auto flex flex-col sm:flex-row gap-3">
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" x-model="search" placeholder="Cari nama aplikasi..." class="w-full pl-11 pr-4 py-3.5 bg-slate-800/80 border border-slate-700 rounded-2xl focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-slate-100 placeholder-slate-400 transition">
+                </div>
+            </div>
+
+            <!-- Category Pills -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6 mb-12">
+                <template x-for="cat in categories">
+                    <button @click="selectedCategory = cat" 
+                        :class="selectedCategory === cat ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white'"
+                        class="px-5 py-2 rounded-xl text-sm font-medium transition duration-300" x-text="cat">
+                    </button>
+                </template>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="product in filteredProducts" :key="product.id">
+                    <div class="bg-slate-800/60 border border-slate-700/80 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group animate-fade-in">
+                        <div>
+                            <!-- Product Image / Banner Thumbnail -->
+                            <div class="relative h-48 overflow-hidden bg-slate-700 cursor-pointer" @click="openDetail(product)">
+                                <img :src="product.image" alt="" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <span class="absolute top-3 left-3 px-3 py-1 bg-slate-900/80 backdrop-blur-md rounded-lg text-xs font-semibold text-indigo-400 border border-slate-700" x-text="product.category"></span>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition duration-300 cursor-pointer" x-text="product.name" @click="openDetail(product)"></h3>
+                                <p class="text-slate-400 text-sm line-clamp-2" x-text="product.desc"></p>
+                            </div>
+                        </div>
+
+                        <!-- Footer card: Tombol Detail -->
+                        <div class="p-6 pt-0 mt-4">
+                            <button @click="openDetail(product)" class="w-full py-3 bg-slate-700 hover:bg-indigo-600 active:scale-95 text-white font-medium rounded-xl transition duration-300 flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-circle-info text-xs"></i>
+                                <span>Lihat Detail</span>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Empty State -->
+            <div x-show="filteredProducts.length === 0" class="text-center py-20 animate-fade-in" x-cloak>
+                <i class="fa-solid fa-face-frown text-5xl text-slate-600 mb-4"></i>
+                <h3 class="text-lg font-bold text-slate-300">Aplikasi tidak ditemukan</h3>
+                <p class="text-slate-500 text-sm">Coba cari dengan kata kunci atau kategori lain.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= KONTAK ================= -->
+    <section id="kontak" class="py-20 bg-slate-900 border-t border-slate-800 z-10 relative">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-white mb-6">Punya Proyek di Pikiran Anda?</h2>
+            <p class="text-slate-400 mb-10">Mari bicarakan bagaimana DC Software dapat membantu merancang dan membangun kebutuhan digital bisnis Anda.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <!-- Ganti link whatsapp nya sesuai nomor lu cuy -->
+                <a href="https://wa.me/6287717778722" target="_blank" class="px-8 py-4 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl shadow-lg shadow-green-600/30 transition duration-300 flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>Hubungi via WhatsApp</span>
+                </a>
+                <a href="mailto:ddoni1085@gmail.com" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl border border-slate-700 transition duration-300 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-envelope text-lg"></i>
+                    <span>Kirim Email</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-8 border-t border-slate-800/50 text-center relative z-10">
+        <p class="text-slate-500 text-sm">© <span x-text="new Date().getFullYear()"></span> DC Software. All rights reserved.</p>
+    </footer>
+
+    <!-- ================= MODAL DETAIL (POP-UP) ================= -->
+    <div x-show="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" x-cloak>
+        
+        <!-- Background Overlay -->
+        <div x-show="showModal" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" 
+             @click="closeModal()">
+        </div>
+        
+        <!-- Modal Content Container -->
+        <div x-show="showModal" 
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave-end="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95"
+             class="relative bg-slate-800 rounded-3xl shadow-2xl border border-slate-700 w-full max-w-5xl flex flex-col overflow-hidden max-h-[90vh]">
+            
+            <!-- Tombol Close (X) -->
+            <button @click="closeModal()" class="absolute top-4 right-4 z-20 w-10 h-10 bg-slate-900/60 hover:bg-red-500 hover:text-white text-slate-300 rounded-full flex items-center justify-center transition duration-300 backdrop-blur-md">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Isi Modal (Scrollable) -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar">
+                <div class="grid grid-cols-1 lg:grid-cols-2" x-show="activeProduct">
+                    
+                    <!-- Kiri: Gambar Produk -->
+                    <div class="relative h-64 sm:h-80 lg:h-full bg-slate-900 min-h-[300px]">
+                        <img :src="activeProduct?.image" class="w-full h-full object-cover" alt="App Preview">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-800 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-slate-800"></div>
+                    </div>
+
+                    <!-- Kanan: Info & Tombol Demo -->
+                    <div class="p-6 sm:p-10 flex flex-col justify-center">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-lg text-xs font-semibold border border-indigo-500/30" x-text="activeProduct?.category"></span>
+                        </div>
+                        
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 leading-tight" x-text="activeProduct?.name"></h2>
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed mb-4" x-text="activeProduct?.desc"></p>
+
+                        <!-- Box Info Akun Demo -->
+                        <template x-if="activeProduct?.demoAccount">
+                            <div class="mb-6 bg-indigo-900/30 border border-indigo-500/30 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                                <div>
+                                    <h4 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2"><i class="fa-solid fa-key me-2"></i>Akses Akun Demo</h4>
+                                    <div class="flex flex-col sm:flex-row sm:space-x-4 text-slate-200 text-sm">
+                                        <span><span class="text-slate-400">Username:</span> <strong x-text="activeProduct.demoAccount.username" class="text-white"></strong></span>
+                                        <span class="hidden sm:inline text-slate-600">|</span>
+                                        <span><span class="text-slate-400">Password:</span> <strong x-text="activeProduct.demoAccount.password" class="text-white"></strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                        <div class="mb-8 mt-2">
+                            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4"><i class="fa-solid fa-list-check me-2"></i>Fitur Unggulan</h4>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <template x-for="feature in activeProduct?.features">
+                                    <li class="flex items-center space-x-2 text-slate-300 text-sm">
+                                        <i class="fa-solid fa-circle-check text-indigo-500"></i>
+                                        <span x-text="feature"></span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+
+                        <!-- Tombol Eksekusi Coba Demo (Buka Tab Baru) -->
+                        <div class="mt-auto pt-4 border-t border-slate-700">
+                            <button @click="executeDemo(activeProduct)" class="w-full px-6 py-4 bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/30 transition duration-300 flex items-center justify-center space-x-3">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-lg"></i>
+                                <span>Coba Demo Sekarang</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification (Pas Klik Coba Demo) -->
+    <div x-show="showToast" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-8"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 translate-y-8"
+         class="fixed bottom-6 right-6 z-[60] bg-indigo-600 text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3 border border-indigo-400/30">
+        <i class="fa-solid fa-circle-check text-xl"></i>
+        <span class="font-medium text-sm" x-text="toastMessage"></span>
+    </div>
+
+    <!-- Script Interaktif menggunakan Alpine.js -->
+    <script>
+        function appData() {
+            return {
+                showModal: false, 
+                activeProduct: null, 
+                search: '',
+                selectedCategory: 'Semua',
+                categories: ['Semua', 'Manajemen', 'Website', 'Tools'],
+                showToast: false,
+                toastMessage: '',
+                products: [
+                    { 
+                        id: 1, 
+                        name: 'Si-Karwan - Sistem Informasi Karyawan', 
+                        category: 'Manajemen', 
+                        desc: 'Aplikasi manajemen Karyawan komprehensif, sangat cocok digunakan untuk perusahaan outsourcing dalam memantau data SDM, hingga pengeluaran dan pemasukan perusahaan', 
+                        demoAccount: { 
+                            username: 'superadmin', 
+                            password: '123456' 
+                        },
+                        features: ['Manajemen Data Karyawan', 'Sistem BPJS', 'Perhitungan Invoice dan pengeluaran', 'Dashboard Analitik Lengkap', 'Sistem Role Akses'],
+                        image: 'https://raw.githubusercontent.com/ddoni1085-ctrl/ddoni1085-ctrl.github.io/refs/heads/main/office-com.jpg',
+                        demoUrl: 'https://demokarwan.dcsoftware.site' 
+                    },
+
+                    { 
+                        id: 2, 
+                        name: 'POS & Inventory Barang', 
+                        category: 'Manajemen', 
+                        desc: 'Sistem Point of Sales (POS) dan manajemen Inventory barang yang efisien, membantu bisnis retail dalam mengelola stok, penjualan, dan laporan keuangan secara real-time.', 
+                        demoAccount: { 
+                            username: 'owner', 
+                            password: '123456' 
+                        },
+                        features: ['Kasir/POS', 'Sistem Inventory', 'Laporan Keuangan Bulanan/Tahunan', 'Dashboard Analitik Lengkap', 'Sistem Role Akses'],
+                        image: 'https://raw.githubusercontent.com/ddoni1085-ctrl/ddoni1085-ctrl.github.io/refs/heads/main/ss-pos.png',
+                        demoUrl: 'https://barang.dcsoftware.site' 
+                    }
+
+
+
+                    
+                ],
+                get filteredProducts() {
+                    return this.products.filter(item => {
+                        let matchesCategory = this.selectedCategory === 'Semua' || item.category === this.selectedCategory;
+                        let matchesSearch = item.name.toLowerCase().includes(this.search.toLowerCase()) || item.desc.toLowerCase().includes(this.search.toLowerCase());
+                        return matchesCategory && matchesSearch;
+                    });
+                },
+                openDetail(product) {
+                    this.activeProduct = product;
+                    this.showModal = true;
+                    // Matiin scroll di background pas modal kebuka
+                    document.body.style.overflow = 'hidden'; 
+                },
+                closeModal() {
+                    this.showModal = false;
+                    // Nyalain scroll lagi
+                    document.body.style.overflow = '';
+                    setTimeout(() => {
+                        this.activeProduct = null;
+                    }, 300);
+                },
+                executeDemo(product) {
+                    this.toastMessage = `Membuka tab baru untuk demo "${product.name}"...`;
+                    this.showToast = true;
+                    
+                    window.open(product.demoUrl, '_blank'); 
+
+                    setTimeout(() => {
+                        this.showToast = false;
+                    }, 3000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
